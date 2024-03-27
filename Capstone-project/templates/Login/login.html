@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- Coding by CodingNepal | www.codingnepalweb.com-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title>FLY SHARE | Login & Registration</title>
+    <link rel="stylesheet" href="{% static 'Login/CSS/login.css' %}" >
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+    <div class="back-button">
+        <a href="{% url 'index' %}" class="back-link">
+          <span class="back-arrow">&lt;</span> Back
+        </a>
+      </div>
+  <div class="container">
+    <input type="checkbox" id="flip">
+    <div class="cover">
+      <div class="front">
+        <img src="https://img.freepik.com/free-vector/key-concept-illustration_114360-6305.jpg?size=626&ext=jpg&ga=GA1.1.1894579647.1706434369&semt=ais" alt="">
+        <!-- <div class="text">
+          <span class="text-1">Every new friend is a <br> new adventure</span>
+          <span class="text-2">Let's get connected</span>
+        </div> -->
+      </div>
+      <!-- <div class="back">
+       
+        <div class="text">
+          <span class="text-1">Complete miles of journey <br> with one step</span>
+          <span class="text-2">Let's get started</span>
+        </div>
+      </div> -->
+    </div>
+    <div class="forms">
+        <div class="form-content">
+          <div class="login-form">
+            {% csrf_token %} {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message|safe }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="top">
+            <div class="title">Login</div>
+
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fas fa-envelope"></i>
+                <input
+                type="text"
+                class="input-field"
+                placeholder="Email"
+                name="username"
+                required
+              />
+              </div>
+              <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input
+                type="password"
+                class="input-field"
+                placeholder="Password"
+                name="user_password"
+                required
+              />
+              </div>
+              <div class="text"><a href="{% url 'password_reset' %}#reset"
+                >Forgot password?</a
+              ></div>
+              <div class="button input-box">
+                <input
+                type="submit"
+                class="submit"
+                value="Sign In"
+                name="sign_in"
+              />
+              </div>
+              <div class="text sign-up-text">Don't have an account?  <a href="{% url 'register' %}" style="color: #ffa500"
+                ><b>Sign Up</b></a
+              > </div>
+            </div>
+        </form>
+      </div>
+    </div>
+        <div class="signup-form">
+        
+          <div class="title">Signup</div>
+          <form
+          action=""
+          method="POST"
+          onsubmit="return checkPassword(event);"
+          id="registration-form"
+        >
+          {% csrf_token %}
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input
+                type="text"
+                class="input-field"
+                placeholder="Firstname"
+                name="first_name"
+                required
+              />    
+              <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input
+                type="text"
+                class="input-field"
+                placeholder="Lastname"
+                name="last_name"
+              /></div>
+              </div>
+              <div class="input-box">
+                <i class="fas fa-user"></i>
+                <input
+                type="text"
+                class="input-field"
+                placeholder="Username"
+                name="username"
+                id="username"
+                required
+              />            </div>
+              <div class="input-box">
+                <i class="fas fa-envelope"></i>
+                <input
+                type="text"
+                class="input-field"
+                placeholder="Email"
+                name="email"
+                required
+              />              </div>
+              <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input
+                type="password"
+                class="input-field"
+                placeholder="Password"
+                name="password1"
+                id="password"
+                required
+              />   </div>
+              <div class="input-box">
+                <i class="fas fa-lock"></i>
+                <input
+              type="password"
+              class="input-field"
+              placeholder="Confirm Password"
+              name="password2"
+              id="cnfrm-password"
+              required
+            />      
+                 </div>
+              <div class="button input-box">
+                <input
+              type="submit"
+              class="submit"
+              value="Register"
+              name="register"
+            />
+              </div>
+              <div id="password-error" style="color: red"></div>
+    
+              <div class="text sign-up-text">Already have an account?  <a href="{% url 'verify' %}" style="color: #ffa500"></a></div>
+            </div>
+      </form>
+    </div>
+    </div>
+   
+  </div>
+  <script>
+    // Wait for the DOM to be ready
+    document.addEventListener("DOMContentLoaded", function () {
+      // Set the duration in milliseconds (e.g., 10 seconds)
+      var duration = 5000;
+
+      // Find the messages and hide them after the specified duration
+      var messages = document.querySelector(".messages");
+      if (messages) {
+        setTimeout(function () {
+          messages.style.display = "none";
+        }, duration);
+      }
+    });
+  </script>
+  
+</body>
+</html>
+<div>{% block content %} {% endblock %}</div>
